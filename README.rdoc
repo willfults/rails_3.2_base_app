@@ -5,10 +5,11 @@ This app was created following the rails tutorial.
 3. type: git init
 4. type: git remote add origin https://github.com/michaelklem/rails_3.2_base_app.git
 5. type: git pull origin master
-6. type: rake db:migrate
-7. type: rake db:populate
-8. type: rake db:test:prepare
-9. type: rspec spec
+6. type: bundle install
+7. type: rake db:migrate
+8. type: rake db:populate
+9. type: rake db:test:prepare
+10. type: rspec spec
 
 All tests should pass.
 
