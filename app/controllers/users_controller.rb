@@ -1,6 +1,7 @@
 
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update, :index, :destroy, :following, :followers]
+  before_filter :authenticate_user!
+  #before_filter :signed_in_user, only: [:edit, :update, :index, :destroy, :following, :followers]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
   
@@ -63,9 +64,14 @@ class UsersController < ApplicationController
 
   private
 
+    def signed_in_user
+      @user = User.find(params[:id])
+      current_user==(@user)
+    end
+
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_path) unless current_user==(@user)
     end
 
     def admin_user

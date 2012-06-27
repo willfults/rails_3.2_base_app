@@ -1,9 +1,16 @@
 require 'spec_helper'
 
 describe RelationshipsController do
+  include Devise::TestHelpers
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:other_user) { FactoryGirl.create(:user) }
+before (:each) do
+    @user = Factory.create(:user)
+    sign_in @user
+  end
+
+
+  let(:user) { Factory.create(:user) }
+  let(:other_user) { Factory.create(:user) }
 
   before { sign_in user }
 

@@ -10,7 +10,15 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+
   has_many :microposts, dependent: :destroy
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -21,19 +29,6 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   
-  validates :name, presence: true
-  validates :name, length: { maximum: 50 }
-  validates :email, presence: true
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, format: { with: VALID_EMAIL_REGEX }
-  validates :email, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
-  
-  has_secure_password
-  
-  before_save { |user| user.email = email.downcase }
-  before_save :create_remember_token
  
   def feed
     Micropost.from_users_followed_by(self)
@@ -50,11 +45,5 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
   end
-  
-  private
 
-    def create_remember_token
-      # Create the token.
-      self.remember_token = SecureRandom.urlsafe_base64
-    end
 end

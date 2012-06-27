@@ -1,11 +1,16 @@
 require 'spec_helper'
 
 describe "Micropost pages" do
+  include Devise::TestHelpers
+  before {
+  
+  }
+  before(:each) do
+      @user = Factory.create(:user)
+      sign_in @user
+    end
 
   subject { page }
-
-  let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
 
   describe "micropost creation" do
     before { visit root_path }

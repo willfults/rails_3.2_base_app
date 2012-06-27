@@ -1,7 +1,8 @@
 
 class MicropostsController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy]
-  before_filter :correct_user,   only: :destroy
+  #before_filter :signed_in_user, only: [:create, :destroy]
+  #before_filter :correct_user,   only: :destroy
+  before_filter :authenticate_user!
   
   def create
     @micropost = current_user.microposts.build(params[:micropost])
@@ -15,10 +16,15 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.destroy
+    @micropost = current_user.microposts.where(:id => params[:id]).first
+    if @micropost.present?
+      @micropost.destroy
+      flash[:success] = "Micropost deleted!"
+    end
+    # in both cases, redirect to root_path
     redirect_to root_path
   end
-
+  
   private
   
     def correct_user
