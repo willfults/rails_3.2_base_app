@@ -7,7 +7,8 @@ jQuery ->
 class AvatarCropper
   constructor: ->
     $('#cropbox').Jcrop
-      aspectRatio: 1
+      #use aspectRatio 1 to keep same aspect ratio
+      #aspectRatio: 1
       onSelect: @update
       onChange: @update
   
@@ -16,11 +17,3 @@ class AvatarCropper
     $('#user_crop_y').val(coords.y)
     $('#user_crop_w').val(coords.w)
     $('#user_crop_h').val(coords.h)
-    @updatePreview(coords)
-
-  updatePreview: (coords) =>
-    $('#preview').css
-      width: Math.round(100/coords.w * $('#cropbox').width()) + 'px'
-      height: Math.round(100/coords.h * $('#cropbox').height()) + 'px'
-      marginLeft: '-' + Math.round(100/coords.w * coords.x) + 'px'
-      marginTop: '-' + Math.round(100/coords.h * coords.y) + 'px'
