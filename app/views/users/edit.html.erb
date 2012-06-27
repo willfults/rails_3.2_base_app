@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="span6 offset3">
-  <%= form_for(@user) do |f| %>
+  <%= form_for @user, :html => {:multipart => true} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :name %>
@@ -11,6 +11,9 @@
 
       <%= f.label :email %>
       <%= f.text_field :email %>
+      
+      <%= f.file_field :image%>
+      <%= f.hidden_field :image_cache %>
 
       <%= f.label :password %>
       <%= f.password_field :password %>
@@ -21,7 +24,7 @@
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 
-    <%= gravatar_for @user %>
+    <%= image_tag @user.image_url(:thumb).to_s %>
     <a href="http://gravatar.com/emails">change</a>
   </div>
 </div>

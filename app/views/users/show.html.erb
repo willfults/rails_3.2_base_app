@@ -3,7 +3,7 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= gravatar_for @user %>
+        <%= image_tag @user.image_url(:thumb).to_s %>
         <%= @user.name %>
       </h1>
     </section>
