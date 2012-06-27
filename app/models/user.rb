@@ -10,7 +10,10 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation, :image, :image_cache
+  attr_accessible :email, :name, :password, :password_confirmation, :image, :image_cache,:crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  after_update :crop_avatar
+  
   has_many :microposts, dependent: :destroy
   mount_uploader :image, ImageUploader
 
@@ -36,6 +39,10 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
  
+  def crop_avatar
+    image.recreate_versions! if crop_x.present?
+  end
+  
   def feed
     Micropost.from_users_followed_by(self)
   end

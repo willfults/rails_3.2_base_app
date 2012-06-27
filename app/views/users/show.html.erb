@@ -3,7 +3,7 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= image_tag @user.image_url(:thumb).to_s %>
+        <%= image_tag @user.image_url(:thumb).to_s if @user.image?%>
         <%= @user.name %>
       </h1>
     </section>

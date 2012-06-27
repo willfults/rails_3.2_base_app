@@ -24,7 +24,7 @@
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 
-    <%= image_tag @user.image_url(:thumb).to_s %>
-    <a href="http://gravatar.com/emails">change</a>
+    <%= image_tag @user.image_url(:thumb).to_s if @user.image?%>
+    
   </div>
 </div>
