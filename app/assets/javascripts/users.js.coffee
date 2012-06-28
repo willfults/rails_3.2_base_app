@@ -7,8 +7,8 @@ jQuery ->
 class AvatarCropper
   constructor: ->
     $('#cropbox').Jcrop
-      #use aspectRatio 1 to keep same aspect ratio
-      #aspectRatio: 1
+      setSelect: [0, 0, 100, 100]
+      aspectRatio: 1
       onSelect: @update
       onChange: @update
   
