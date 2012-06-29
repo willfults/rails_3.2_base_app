@@ -81,9 +81,9 @@ describe "User pages" do
       before do
         fill_in "Name",             with: new_name
         fill_in "Email",            with: new_email
-        fill_in "Password",         with: "password"
-        fill_in "Password confirmation", with: "password"
-        fill_in "Current password", with: "password"
+        fill_in "Password",         with: user.password
+        fill_in "Password confirmation", with: user.password
+        fill_in "Current password", with: user.password
         click_button "Update"
       end
 
@@ -101,7 +101,7 @@ describe "User pages" do
   describe "index" do
     let(:user) { FactoryGirl.create(:user) }
 
-    before(:all) { 30.times { FactoryGirl.create(:multiple_user) } }
+    before(:all) { 30.times { FactoryGirl.create(:user) } }
     after(:all)  { User.delete_all }
 
     before(:each) do
@@ -146,7 +146,7 @@ describe "User pages" do
     end
 
     describe "follow/unfollow buttons" do
-      let(:other_user) { FactoryGirl.create(:user_other) }
+      let(:other_user) { FactoryGirl.create(:user) }
       
       describe "following a user" do
         before { visit user_path(other_user) }
@@ -197,7 +197,7 @@ describe "User pages" do
 
   describe "following/followers" do
     let(:user) { FactoryGirl.create(:user) }
-    let(:user_other) { FactoryGirl.create(:user_other) }
+    let(:user_other) { FactoryGirl.create(:user) }
     before { user.follow!(user_other) }
 
     describe "followed users" do

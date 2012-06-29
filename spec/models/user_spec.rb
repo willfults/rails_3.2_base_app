@@ -130,7 +130,7 @@ describe User do
 
     describe "status" do
       let(:unfollowed_post) do
-        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user_other))
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
       end
 
       its(:feed) { should include(newer_micropost) }
@@ -142,7 +142,7 @@ describe User do
       let(:unfollowed_post) do
         FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
       end
-      let(:followed_user) { FactoryGirl.create(:user_other) }
+      let(:followed_user) { FactoryGirl.create(:user) }
 
       before do
         @user.follow!(followed_user)
@@ -162,7 +162,7 @@ describe User do
   end
 
   describe "following" do
-    let(:other_user) { FactoryGirl.create(:user_other) }    
+    let(:other_user) { FactoryGirl.create(:user) }    
     before do
       @user.save
       @user.follow!(other_user)

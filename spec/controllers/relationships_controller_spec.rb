@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RelationshipsController do
   include Devise::TestHelpers
 
-  let(:other_user) { FactoryGirl.create(:user_other) }
+  let(:other_user) { FactoryGirl.create(:user) }
   
   let(:user) { FactoryGirl.create(:user) }
 
