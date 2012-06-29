@@ -6,7 +6,11 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
-</head>
+  <script type="text/javascript" src="http://platform.linkedin.com/in.js">>
+    api_key: fc0yd5hs7ra3
+    authorize: true
+  </script>
+ </head>
 <body>
   <%= render 'layouts/header' %>
   <div class="container">
