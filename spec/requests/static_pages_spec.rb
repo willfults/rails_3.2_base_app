@@ -1,11 +1,18 @@
 require 'spec_helper'
 
 describe "Static pages" do
+  #include Devise::TestHelpers
+
+  
+    
 
   subject { page }
 
   describe "Home page" do
-    before { visit root_path }
+    
+    before { 
+    visit root_path 
+    }
 
     it { should have_selector('h1',    text: 'Sample App') }
     it { should have_selector('title', text: full_title('')) }
@@ -16,7 +23,7 @@ describe "Static pages" do
       before do
         FactoryGirl.create(:micropost, user: user, content: "Lorem")
         FactoryGirl.create(:micropost, user: user, content: "Ipsum")
-        sign_in user
+        sign_in_user user
         visit root_path
       end
 
@@ -27,9 +34,9 @@ describe "Static pages" do
       end
 
       describe "follower/following counts" do
-        let(:other_user) { FactoryGirl.create(:user) }
+        let(:user_other) { FactoryGirl.create(:user_other) }
         before do
-          other_user.follow!(user)
+          user_other.follow!(user)
           visit root_path
         end
 

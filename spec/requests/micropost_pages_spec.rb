@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe "Micropost pages" do
+  #include Devise::TestHelpers
   
   before(:each) do
-      @user = Factory.create(:user)
-      sign_in @user
+      @user = FactoryGirl.create(:user)
+      sign_in_user @user
     end
 
   subject { page }
@@ -34,7 +35,7 @@ describe "Micropost pages" do
   end
 
   describe "micropost destruction" do
-    before { FactoryGirl.create(:micropost, user: user) }
+    before { FactoryGirl.create(:micropost, user: @user) }
     
     describe "as correct user" do
       before { visit root_path }
