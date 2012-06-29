@@ -190,6 +190,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.0)
   mini_magick
   rails (= 3.2.5)
+  railties (= 3.2.5)
   rspec-rails
   sass-rails (~> 3.2.4)
   sqlite3 (= 1.3.5)
