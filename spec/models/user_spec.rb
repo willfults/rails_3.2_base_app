@@ -24,6 +24,8 @@ describe User do
   it { should respond_to(:followed_users) }
   it { should respond_to(:reverse_relationships) }
   it { should respond_to(:followers) }
+  it { should respond_to(:linkedin_id) }
+  
     
   it { should be_valid }
   it { should_not be_admin }
@@ -211,4 +213,19 @@ describe User do
 
   end
 
-end
+end# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean         default(FALSE)
+#  image           :string(255)
+#  linkedin_id     :string(255)
+#
+

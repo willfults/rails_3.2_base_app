@@ -30,9 +30,13 @@
 
     <%= link_to "Sign up now!", signup_path, 
                                 class: "btn btn-large btn-primary" %>
-    <%= link_to "Sign up through LinkedIn!", linkedin_path, 
-                                class: "btn btn-large btn-primary" %>
+    <script type="IN/Login" data-onAuth="onLinkedInAuth">
+    	<form method="post" action="/sessions" id="linkedin_login" name="linkedin_login">
+    		<input type="hidden" id="linkedin_id" name="linkedin_id" value="">
+    	</form>
+    </script>      	
+ 
   </div>
-
-  <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+  <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %> 
+ 
 <% end %>

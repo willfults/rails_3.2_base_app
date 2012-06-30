@@ -10,6 +10,7 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'railties', '3.2.5'
 gem 'pg'
+gem 'linkedin', '0.3.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

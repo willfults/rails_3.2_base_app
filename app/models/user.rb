@@ -2,15 +2,20 @@
 #
 # Table name: users
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean         default(FALSE)
+#  image           :string(255)
+#  linkedin_id     :string(255)
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation, :image, :image_cache,:crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessible :email, :name, :password, :password_confirmation, :linkedin_id, :image, :image_cache,:crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_avatar
   
@@ -57,6 +62,10 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user.id).destroy
+  end
+  
+  def isLinkedIn?
+    !self.linkedin_id.blank?
   end
   
   private

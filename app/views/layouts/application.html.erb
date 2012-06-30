@@ -10,7 +10,17 @@
     api_key: fc0yd5hs7ra3
     authorize: true
   </script>
- </head>
+  <script type="text/javascript">
+   function onLinkedInAuth() {
+    IN.API.Profile("me")
+      .result( function(me) {
+        var id = me.values[0].id;
+        $('#linkedin_id').val(id);
+        $('#linkedin_login').submit();
+      });
+    }
+  </script>
+</head>
 <body>
   <%= render 'layouts/header' %>
   <div class="container">
@@ -19,6 +29,6 @@
     <% end %>
     <%= yield %>
     <%= render 'layouts/footer' %>
-  </div>
-  </body>
+    </div>
+ </body>
 </html>

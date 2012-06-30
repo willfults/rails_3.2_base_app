@@ -1,5 +1,12 @@
 module SessionsHelper
 
+  def sign_in_with_linkedin(linkedin_id)
+    user = User.find_by_linkedin_id(linkedin_id)
+    unless user.nil?
+      sign_in(user)
+    end
+  end
+
   def sign_in(user)
     cookies.permanent[:remember_token] = user.remember_token
     self.current_user = user
