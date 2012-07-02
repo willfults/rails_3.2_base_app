@@ -15,13 +15,8 @@
     IN.API.Profile("me")
       .result( function(me) {
         var id = me.values[0].id;
-        window.setTimeout(  
-          function() {  
-            $('#linkedin_id').val(id);
-            $('#linkedin_login').submit();
-          },  
-          1000  
-        );        
+       	$('#linkedin_id').val(id);
+       	$('#linkedin_login').submit();
       });
     }
   </script>
